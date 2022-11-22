@@ -54,7 +54,7 @@ const Dashboard = () => {
 
                 <Container fluid className="mt-5">
 
-                    <h5 className="mb-3 bg-success p-3 rounded-2 text-white"> Welcome {details?.firstName}  {details?.lastName}</h5>
+                    <h4> Welcome { } </h4>
 
                     <Card>
                         <CardBody>
