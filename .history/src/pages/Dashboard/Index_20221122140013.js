@@ -38,6 +38,8 @@ const Dashboard = () => {
         rows: data?.data?.data,
     }
 
+    console.log(data)
+
     return (
         <Layout>
             <React.Fragment>

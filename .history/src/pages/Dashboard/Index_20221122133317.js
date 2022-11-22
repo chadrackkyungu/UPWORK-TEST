@@ -32,11 +32,12 @@ const Dashboard = () => {
     if (!data) {
         return <div> <h2>Loading... </h2> </div>
     }
-
     const resultData = {
         columns: column,
-        rows: data?.data?.data,
+        rows: data,
     }
+
+    console.log(data)
 
     return (
         <Layout>
@@ -64,14 +65,14 @@ const Dashboard = () => {
                         <Col md={6}>
                             <Card>
                                 <CardBody>
-                                    <PieChart female={data?.female} male={data?.male} />
+                                    <PieChart />
                                 </CardBody>
                             </Card>
                         </Col>
                         <Col md={6}>
                             <Card>
                                 <CardBody>
-                                    <BarChart data={data} />
+                                    <BarChart />
                                 </CardBody>
                             </Card>
                         </Col>

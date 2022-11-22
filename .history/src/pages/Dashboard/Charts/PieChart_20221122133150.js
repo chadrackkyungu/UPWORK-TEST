@@ -1,13 +1,13 @@
 import React from 'react';
 import { Pie } from 'react-chartjs-2';
 
-function PieChart({ male, female }) {
+function PieChart() {
 
     const data = {
         labels: ["Female", "Male"],
         datasets: [
             {
-                data: [male, female],
+                data: [300, 180],
                 backgroundColor: [
                     "#02a499",
                     "#ebeff2"

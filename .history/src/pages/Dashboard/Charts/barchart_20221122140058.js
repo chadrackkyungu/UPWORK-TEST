@@ -1,26 +1,27 @@
 import React from 'react';
-import { Pie } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 
-function PieChart({ male, female }) {
+function BarChart() {
 
     const data = {
-        labels: ["Female", "Male"],
+        labels: ["January", "February", "March", "April"],
         datasets: [
             {
-                data: [male, female],
-                backgroundColor: [
-                    "#02a499",
-                    "#ebeff2"
-                ],
-                hoverBackgroundColor: [
-                    "#02a499",
-                    "#ebeff2"
-                ],
-                hoverBorderColor: "#fff"
-            }]
+                label: "Visitors",
+                backgroundColor: "#02a499",
+                borderColor: "#02a499",
+                borderWidth: 1,
+                hoverBackgroundColor: "#02a499",
+                hoverBorderColor: "#02a499",
+                data: [15, 15, 11, 20]
+            }
+        ]
     };
 
     const option = {
+        tootlbar: {
+            show: false
+        },
         tooltips: {
             callbacks: {
                 label: function (tooltipItem, data) {
@@ -40,8 +41,8 @@ function PieChart({ male, female }) {
 
     return (
         <React.Fragment>
-            <Pie width={1000} height={600} data={data} options={option} />
+            <Bar width={1000} height={600} data={data} options={option} />
         </React.Fragment>
     );
 }
-export default PieChart;   
+export default BarChart;   

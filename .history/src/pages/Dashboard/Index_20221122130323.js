@@ -17,6 +17,7 @@ const Dashboard = () => {
     const { data, loading, reFetch } = useFetch(`${process.env.REACT_APP_URL}/visitor/${country}`, null);
 
     const handleChange = event => {
+        console.log(event.target.value);
         setCountry(event.target.value);
     };
 
@@ -29,14 +30,12 @@ const Dashboard = () => {
         { label: "Month", field: "month", sort: "asc", width: 150 },
     ]
 
-    if (!data) {
-        return <div> <h2>Loading... </h2> </div>
-    }
-
     const resultData = {
         columns: column,
-        rows: data?.data?.data,
+        rows: data,
     }
+
+    console.log(country)
 
     return (
         <Layout>
@@ -64,14 +63,14 @@ const Dashboard = () => {
                         <Col md={6}>
                             <Card>
                                 <CardBody>
-                                    <PieChart female={data?.female} male={data?.male} />
+                                    <PieChart />
                                 </CardBody>
                             </Card>
                         </Col>
                         <Col md={6}>
                             <Card>
                                 <CardBody>
-                                    <BarChart data={data} />
+                                    <BarChart />
                                 </CardBody>
                             </Card>
                         </Col>

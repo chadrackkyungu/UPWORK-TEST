@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import MetaTags from 'react-meta-tags';
 import { Container, Col, Row, Card, CardBody } from "reactstrap"
 import Layout from "../Layout"
@@ -13,29 +13,39 @@ import useFetch from './../../hooks/useFecth';
 const Dashboard = () => {
     const userDet = useStore1Selector(userDetails);
     const details = userDet?.data?.data;
-    const [country, setCountry] = useState('Canada')
-    const { data, loading, reFetch } = useFetch(`${process.env.REACT_APP_URL}/visitor/${country}`, null);
+    const { data, loading, reFetch } = useFetch(`${process.env.REACT_APP_URL}/visitor/canada`, null);
 
-    const handleChange = event => {
-        setCountry(event.target.value);
-    };
+    console.log(" Result : ", data)
 
-    const column = [
-        { label: "First Name", field: "firstName", sort: "asc", width: 150 },
-        { label: "Last Name", field: "lastName", sort: "asc", width: 150 },
-        { label: "Gender", field: "gender", sort: "asc", width: 150 },
-        { label: "Age", field: "age", sort: "asc", width: 150 },
-        { label: "Country", field: "country", sort: "asc", width: 150 },
-        { label: "Month", field: "month", sort: "asc", width: 150 },
+    function handleValidSubmit(values) {
+        console.log(values)
+    }
+
+    const dataDb = [
+        {
+            Name: "John",
+            sureName: "Doe",
+            phoneNumber: "0680275001",
+            date: "2022-11-22",
+        },
+        {
+            Name: "Caleb",
+            sureName: "Gael",
+            phoneNumber: "0680275001",
+            date: "2022-11-22",
+        }
     ]
 
-    if (!data) {
-        return <div> <h2>Loading... </h2> </div>
-    }
+    const column = [
+        { label: "Name", field: "Name", sort: "asc", width: 150 },
+        { label: "Sure Name", field: "sureName", sort: "asc", width: 150 },
+        { label: "Phone number", field: "phoneNumber", sort: "asc", width: 150 },
+        { label: "Date", field: "date", sort: "asc", width: 150 },
+    ]
 
     const resultData = {
         columns: column,
-        rows: data?.data?.data,
+        rows: dataDb,
     }
 
     return (
@@ -51,10 +61,11 @@ const Dashboard = () => {
 
                     <Card>
                         <CardBody>
-                            <AvForm className="form-horizontal mt-4">
-                                <AvField type="select" name="select" label="Select Option" onChange={handleChange}>
-                                    <option value="Canada"> Canada </option>
-                                    <option value="southAfrica"> South africa </option>
+                            <AvForm className="form-horizontal mt-4" onValidSubmit={(e, v) => handleValidSubmit(e, v)}>
+                                <AvField type="select" name="select" label="Select Option">
+                                    <option>Select...</option>
+                                    <option> South africa </option>
+                                    <option> DR Congo </option>
                                 </AvField>
                             </AvForm>
                         </CardBody>
@@ -64,14 +75,14 @@ const Dashboard = () => {
                         <Col md={6}>
                             <Card>
                                 <CardBody>
-                                    <PieChart female={data?.female} male={data?.male} />
+                                    <PieChart />
                                 </CardBody>
                             </Card>
                         </Col>
                         <Col md={6}>
                             <Card>
                                 <CardBody>
-                                    <BarChart data={data} />
+                                    <BarChart />
                                 </CardBody>
                             </Card>
                         </Col>

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import MetaTags from 'react-meta-tags';
 import { Container, Col, Row, Card, CardBody } from "reactstrap"
 import Layout from "../Layout"
@@ -13,10 +13,11 @@ import useFetch from './../../hooks/useFecth';
 const Dashboard = () => {
     const userDet = useStore1Selector(userDetails);
     const details = userDet?.data?.data;
+    const { data, loading, reFetch } = useFetch(`${process.env.REACT_APP_URL}/visitor/canada`, null);
     const [country, setCountry] = useState('Canada')
-    const { data, loading, reFetch } = useFetch(`${process.env.REACT_APP_URL}/visitor/${country}`, null);
 
     const handleChange = event => {
+        console.log(event.target.value);
         setCountry(event.target.value);
     };
 
@@ -29,14 +30,12 @@ const Dashboard = () => {
         { label: "Month", field: "month", sort: "asc", width: 150 },
     ]
 
-    if (!data) {
-        return <div> <h2>Loading... </h2> </div>
-    }
-
     const resultData = {
         columns: column,
-        rows: data?.data?.data,
+        rows: data,
     }
+
+    console.log(country)
 
     return (
         <Layout>
@@ -54,7 +53,7 @@ const Dashboard = () => {
                             <AvForm className="form-horizontal mt-4">
                                 <AvField type="select" name="select" label="Select Option" onChange={handleChange}>
                                     <option value="Canada"> Canada </option>
-                                    <option value="southAfrica"> South africa </option>
+                                    <option value="SouthAfrica"> South africa </option>
                                 </AvField>
                             </AvForm>
                         </CardBody>
@@ -64,14 +63,14 @@ const Dashboard = () => {
                         <Col md={6}>
                             <Card>
                                 <CardBody>
-                                    <PieChart female={data?.female} male={data?.male} />
+                                    <PieChart />
                                 </CardBody>
                             </Card>
                         </Col>
                         <Col md={6}>
                             <Card>
                                 <CardBody>
-                                    <BarChart data={data} />
+                                    <BarChart />
                                 </CardBody>
                             </Card>
                         </Col>

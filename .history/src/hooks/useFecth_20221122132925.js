@@ -21,7 +21,7 @@ const useFetch = (url, token) => {
             .then(response => response.json())
             .then(result => {
                 if (result.status === "success") {
-                    setData(result)
+                    setData(result.data)
                     setLength(result.results)
                 }
             })

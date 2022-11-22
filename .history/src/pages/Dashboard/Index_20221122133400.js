@@ -38,6 +38,8 @@ const Dashboard = () => {
         rows: data?.data?.data,
     }
 
+    console.log(data)
+
     return (
         <Layout>
             <React.Fragment>
@@ -64,14 +66,14 @@ const Dashboard = () => {
                         <Col md={6}>
                             <Card>
                                 <CardBody>
-                                    <PieChart female={data?.female} male={data?.male} />
+                                    <PieChart />
                                 </CardBody>
                             </Card>
                         </Col>
                         <Col md={6}>
                             <Card>
                                 <CardBody>
-                                    <BarChart data={data} />
+                                    <BarChart />
                                 </CardBody>
                             </Card>
                         </Col>
